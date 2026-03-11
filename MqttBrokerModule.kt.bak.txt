@@ -1,0 +1,68 @@
+package expo.modules.mqttbroker
+
+import expo.modules.kotlin.modules.Module
+import expo.modules.kotlin.modules.ModuleDefinition
+import java.net.URL
+import io.moquette.broker.Server
+import io.moquette.broker.config.MemoryConfig
+import java.util.Properties
+
+class MqttBrokerModule : Module() {
+
+  private var mqttBroker: Server? = null
+
+  override fun definition() = ModuleDefinition {
+
+
+
+    Name("MqttBroker")
+
+
+    Function("startBroker") {
+      mqttBroker = Server()
+
+      val props = Properties()
+      props["port"] = "1883"
+      props["host"] = "0.0.0.0"
+
+      mqttBroker?.startServer(MemoryConfig(props))
+    }
+
+    Function("stopBroker") {
+      mqttBroker?.stopServer()
+    }
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
